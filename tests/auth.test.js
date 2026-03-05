@@ -2,6 +2,7 @@ import request from "supertest";
 import app from "../src/app.js";
 
 describe("Auth Routes", () => {
+  const uniqueEmail = `test-${Date.now()}@example.com`;
 
   let token;
 
@@ -10,19 +11,19 @@ describe("Auth Routes", () => {
       .post("/api/auth/register")
       .send({
         name: "Test User",
-        email: "test@example.com",
+        email: uniqueEmail,
         password: "123456"
       });
 
     expect(res.statusCode).toBe(201);
-    expect(res.body.email).toBe("test@example.com");
+    expect(res.body.email).toBe(uniqueEmail);
   });
 
   it("should login user and return token", async () => {
     const res = await request(app)
       .post("/api/auth/login")
       .send({
-        email: "test@example.com",
+        email: uniqueEmail,
         password: "123456"
       });
 
