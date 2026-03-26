@@ -3,6 +3,7 @@ import app from "../src/app.js";
 
 let token;
 let taskId;
+const uniqueEmail = `task-${Date.now()}@example.com`;
 
 beforeAll(async () => {
   // Register
@@ -10,7 +11,7 @@ beforeAll(async () => {
     .post("/api/auth/register")
     .send({
       name: "Task User",
-      email: "task@example.com",
+      email: uniqueEmail,
       password: "123456"
     });
 
@@ -18,7 +19,7 @@ beforeAll(async () => {
   const res = await request(app)
     .post("/api/auth/login")
     .send({
-      email: "task@example.com",
+      email: uniqueEmail,
       password: "123456"
     });
 
